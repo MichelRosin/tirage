@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tirage au sort</title>
+<meta name="description" content="Tirez au sort un nombre donné de personnes à partir de listes de noms." />
+<meta name="theme-color" content="#14172B" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="wax-seal" aria-hidden="true"></div>
+
+<main class="sheet">
+  <header class="sheet__header">
+    <p class="eyebrow">Registre du tirage</p>
+    <h1>Tirage au sort</h1>
+    <p class="lede">Déposez vos listes, fixez le nombre de gagnants, et laissez le sort trancher.</p>
+  </header>
+
+  <section class="panel" aria-labelledby="import-title">
+    <h2 id="import-title" class="panel__title">1 · Les participants</h2>
+
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-describedby="dropzone-hint">
+      <p class="dropzone__main">Glissez vos fichiers .txt ici</p>
+      <p class="dropzone__hint" id="dropzone-hint">ou cliquez pour parcourir — un nom par ligne</p>
+      <input type="file" id="fileInput" accept=".txt" multiple hidden />
+    </div>
+
+    <details class="paste">
+      <summary>Coller une liste à la main</summary>
+      <textarea id="pasteArea" rows="5" placeholder="Un nom par ligne&#10;Ex.&#10;Camille Durand&#10;Yanis Belkacem"></textarea>
+      <button id="addPasted" class="btn btn--ghost" type="button">Ajouter à la liste</button>
+    </details>
+
+    <div class="tally">
+      <span id="tallyCount">0</span> participant(s) chargé(s)
+      <button id="clearAll" class="link-btn" type="button" hidden>tout effacer</button>
+    </div>
+
+    <ul id="fileList" class="file-list"></ul>
+
+    <label class="check">
+      <input type="checkbox" id="allowDuplicates" />
+      Autoriser les doublons de noms
+    </label>
+  </section>
+
+  <section class="panel" aria-labelledby="draw-title">
+    <h2 id="draw-title" class="panel__title">2 · Le tirage</h2>
+
+    <div class="draw-controls">
+      <label for="drawCount">Nombre à tirer</label>
+      <input type="number" id="drawCount" min="1" value="1" />
+      <button id="drawBtn" class="btn btn--primary" type="button" disabled>Tirer au sort</button>
+    </div>
+
+    <p id="drawWarning" class="warning" hidden></p>
+  </section>
+
+  <section id="resultsSection" class="panel panel--results" aria-labelledby="results-title" hidden>
+    <h2 id="results-title" class="panel__title">Résultat</h2>
+    <ol id="resultsList" class="tickets"></ol>
+    <div class="results-actions">
+      <button id="downloadBtn" class="btn btn--ghost" type="button">Télécharger le résultat (.txt)</button>
+      <button id="redrawBtn" class="btn btn--ghost" type="button">Nouveau tirage</button>
+    </div>
+  </section>
+
+  <footer class="sheet__footer">
+    <p>Tout se passe dans votre navigateur — aucune liste n'est envoyée où que ce soit.</p>
+  </footer>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
